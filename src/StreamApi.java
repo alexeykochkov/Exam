@@ -1,10 +1,8 @@
 import java.lang.String;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StreamApi {
@@ -12,6 +10,20 @@ public class StreamApi {
         // Условие: Напишите метод, который принимает строку
         // и возвращает количество гласных букв (a, e, i, o, u) в ней (без учёта регистра).
         // Ожидаемый результат: 3 (e, o, o)
+
+        int n = 5;
+        System.out.println(Arrays.toString(createSquareArray(n)));
+
+        Map<String, Integer> original = Map.of(
+                "one", 1,
+                "two", 2,
+                "three", 3);
+
+        Map<Integer, String> reversedStream = reversedStream(original);
+        System.out.println(reversedStream);
+
+        Map<Integer, String> reversedLoop = reversedLoop(original);
+        System.out.println(reversedLoop);
 
         String input = "Привет мир!";
         String[] words = {"a", "s", "e"};
@@ -152,6 +164,28 @@ public class StreamApi {
                 .filter(numbers -> numbers % 2 == 0)
                 .mapToInt(Integer::intValue)
                 .sum();
+    }
+
+        public static int[] createSquareArray(int n){
+        return IntStream.range(0, n)
+                .map(i -> i * i)
+                .toArray();
+    }
+
+    public static Map<Integer, String> reversedStream (Map<String, Integer> map) {
+        return map.entrySet()
+                .stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getValue,
+                        Map.Entry::getKey));
+    }
+
+    public static Map<Integer, String> reversedLoop (Map<String, Integer> map) {
+        Map <Integer, String> reversed = new HashMap();
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            reversed.put(entry.getValue(),entry.getKey());
+        }
+        return reversed;
     }
 
     public static String wordsSplit(String string) {

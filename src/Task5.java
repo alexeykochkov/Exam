@@ -33,5 +33,4 @@ public class Task5 {
         }
         return Arrays.toString(newChar);
     }
-
 }
